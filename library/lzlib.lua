@@ -49,12 +49,73 @@ function zlib.compress(buffer, level, method, windowBits, memLevel, strategy) en
 ---@return string
 function zlib.decompress(buffer, windowBits) end
 
+---@class Sink
+local Sink = {}
+
+function Sink:write() end
+function Sink:close() end
+function Sink:flush() end
+
 ---Return a deflate stream.
 ---
-function zlib.deflate() end
+---@param sink function | Sink
+---@param level? integer - compression level, default `Z_DEFAILT_COMPRESSION`
+---@param method? integer - default `Z_DEFLATED`
+---@param windowBits? integer -  default `15`
+---@param memLevel? integer - default `8`
+---@param strategy? integer - default `Z_DEFAULT_STRATEGY`
+---@param dictionary? string - default `""`
+---
+---@return Stream
+function zlib.deflate(sink, level, method, windowBits, memLevel, strategy,
+                      dictionary) end
 
+---@class InflateSink
+local InflateSink = {}
+function InflateSink:read() end
+function InflateSink:close() end
+
+---
 ---Return an inflate stream.
 ---
-function zlib.inflate() end
+---@param source string|function|InflateSink
+---@param windowBits? integer -  default `15`
+---@param dictionary? string - default `""`
+---@return Stream
+function zlib.inflate(source, windowBits, dictionary) end
+
+---@class Stream
+local Stream = {}
+
+---	stream:write(...)
+---		Write each parameter into the sream.
+function Stream:write(...) end
+
+---
+---	stream:read([option [, ...]])
+---		Read from the stream, each parameter corresponds to
+---			a return value.
+---
+---		With no arguments, it reads a line.
+---		Parameters are interpreted as follows:
+---		  number - reads the specified number of bytes
+---		  'a' - reads the remaining bytes
+---		  'l' - reads a line
+---@param ... integer|'a'|'l'
+function Stream:read(...) end
+
+---Returns an iterator that returns a new line each time
+---it is called.
+---@return function
+function Stream:lines() end
+
+---
+---Flush output for deflate streams.
+---@param opts 'sync'|'full'|'finish'
+function Stream:flush(opts) end
+
+---
+---Close the stream.
+function Stream:close() end
 
 return zlib

@@ -1,15 +1,19 @@
 ---@meta
+---The definitions are developed in this repository: https://github.com/LuaCATS/lzlib
+
 ---
 ---`lzlib`, by Tiago Dionizio, http://luaforge.net/projects/lzlib/.
 ---https://luarocks.org/modules/hisham/lzlib
 ---https://github.com/LuaDist/lzlib
-zlib = {}
+local zlib = {}
 
+---
 ---returns zlib version
 ---
 ---@return string
 function zlib.version() end
 
+---
 ---Without any parameters, returns the initial adler32 value.
 ---
 ---Call to update the adler32 value, adler is the current value, buffer is passed
@@ -21,6 +25,7 @@ function zlib.version() end
 ---@return string buffer
 function zlib.adler32(adler32, buffer) end
 
+---
 ---Same as zlib.adler32.
 ---
 ---@param crc32? integer
@@ -29,6 +34,7 @@ function zlib.adler32(adler32, buffer) end
 ---@return string buffer
 function zlib.crc32(crc32, buffer) end
 
+---
 ---Return a string containing the compressed buffer according to the given parameters.
 ---
 ---@param buffer string
@@ -41,6 +47,7 @@ function zlib.crc32(crc32, buffer) end
 ---@return string buffer
 function zlib.compress(buffer, level, method, windowBits, memLevel, strategy) end
 
+---
 ---Return the decompressed stream after processing the given buffer.
 ---
 ---@param buffer string
@@ -56,6 +63,7 @@ function Sink:write() end
 function Sink:close() end
 function Sink:flush() end
 
+---
 ---Return a deflate stream.
 ---
 ---@param sink function | Sink
@@ -70,6 +78,7 @@ function Sink:flush() end
 function zlib.deflate(sink, level, method, windowBits, memLevel, strategy,
                       dictionary) end
 
+---
 ---@class InflateSink
 local InflateSink = {}
 function InflateSink:read() end
@@ -84,26 +93,29 @@ function InflateSink:close() end
 ---@return Stream
 function zlib.inflate(source, windowBits, dictionary) end
 
+---
 ---@class Stream
 local Stream = {}
 
----	stream:write(...)
----		Write each parameter into the sream.
+---
+---Write each parameter into the stream.
+---
+---@param ... any
 function Stream:write(...) end
 
 ---
----	stream:read([option [, ...]])
----		Read from the stream, each parameter corresponds to
----			a return value.
+---  Read from the stream, each parameter corresponds to
+---   a return value.
 ---
----		With no arguments, it reads a line.
----		Parameters are interpreted as follows:
----		  number - reads the specified number of bytes
----		  'a' - reads the remaining bytes
----		  'l' - reads a line
+---  With no arguments, it reads a line.
+---  Parameters are interpreted as follows:
+---    number - reads the specified number of bytes
+---    'a' - reads the remaining bytes
+---    'l' - reads a line
 ---@param ... integer|'a'|'l'
 function Stream:read(...) end
 
+---
 ---Returns an iterator that returns a new line each time
 ---it is called.
 ---@return function

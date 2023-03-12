@@ -75,8 +75,7 @@ function Sink:flush() end
 ---@param dictionary? string - default `""`
 ---
 ---@return Stream
-function zlib.deflate(sink, level, method, windowBits, memLevel, strategy,
-                      dictionary) end
+function zlib.deflate(sink, level, method, windowBits, memLevel, strategy, dictionary) end
 
 ---
 ---@class InflateSink

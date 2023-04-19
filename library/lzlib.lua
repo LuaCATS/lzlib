@@ -35,7 +35,6 @@ function zlib.version() end
 function zlib.adler32(adler32, buffer) end
 
 ---
----
 ---Return the initial `crc32` value.
 ---
 ---Call to update the `crc32` value, `crc32` is the current value, `buffer` is passed

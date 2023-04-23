@@ -94,19 +94,17 @@ function Sink:flush() end
 ---
 ---Return a deflate stream.
 ---
----@param sink function | Sink
----@param level? integer - compression level, default `Z_DEFAILT_COMPRESSION`
----@param method? integer - default `Z_DEFLATED`
----@param windowBits? integer -  default `15`
----@param memLevel? integer - default `8`
+---@param level? integer # The compression level must be `-1` (default compression), or between `0` and `9`: `1` gives best speed, `9` gives best compression, `0` gives no compression at all (the input data is simply copied a block at a time).
+---@param method? integer # The method parameter is the compression method. It must be `8` (`Z_DEFLATED`) in this version of the library.
+---@param window_bits? integer # `The window_bits` parameter is the base two logarithm of the maximum window size (the size of the history buffer). It should be in the range `8..15` for this version of the library, default `15`.
+---@param mem_level? integer - default `8`
 ---@param strategy? integer - default `Z_DEFAULT_STRATEGY`
 ---@param dictionary? string - default `""`
 ---
 ---@return Stream
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
-function zlib.deflate(sink, level, method, windowBits, memLevel, strategy, dictionary) end
-
+function zlib.deflate(sink, level, method, window_bits, mem_level, strategy, dictionary) end
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
 ---@class InflateSink

@@ -87,7 +87,15 @@ function zlib.crc32(crc32, buffer) end
 ---@return string buffer
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
-function zlib.compress(buffer, level, method, windowBits, memLevel, strategy) end
+function zlib.compress(
+  buffer,
+  level,
+  method,
+  windowBits,
+  memLevel,
+  strategy
+)
+end
 
 ---
 ---Return the decompressed stream after processing the given buffer.
@@ -130,7 +138,16 @@ function Sink:flush() end
 ---@return Stream
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
-function zlib.deflate(sink, level, method, window_bits, mem_level, strategy, dictionary) end
+function zlib.deflate(
+  sink,
+  level,
+  method,
+  window_bits,
+  mem_level,
+  strategy,
+  dictionary
+)
+end
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
 ---@class InflateSink

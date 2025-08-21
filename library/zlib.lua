@@ -51,7 +51,6 @@ local zlib = {}
 ---__Reference:__
 ---
 ---* Corresponding C source code: [lzlib.c#L699-L703](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L699-L703)
----* Corresponding LuaTeX C source code: [lzlib.c#L331-L335](https://gitlab.lisn.upsaclay.fr/texlive/luatex/-/blob/f52b099f3e01d53dc03b315e1909245c3d5418d3/source/texk/web2c/luatexdir/luazlib/lzlib.c#L331-L335)
 ---
 ---@return string version # For example `1.2.13`
 ---
@@ -82,7 +81,6 @@ function zlib.version() end
 ---__Reference:__
 ---
 ---* Corresponding C source code: [lzlib.c#L706-L723](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L706-L723)
----* Corresponding LuaTeX C source code: [lzlib.c#L338-L355](https://gitlab.lisn.upsaclay.fr/texlive/luatex/-/blob/f52b099f3e01d53dc03b315e1909245c3d5418d3/source/texk/web2c/luatexdir/luazlib/lzlib.c#L338-L355)
 ---
 ---@param adler32? number
 ---@param buffer? string
@@ -116,7 +114,6 @@ function zlib.adler32(adler32, buffer) end
 ---__Reference:__
 ---
 ---* Corresponding C source code: [lzlib.c#L726-L743](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L726-L743)
----* Corresponding LuaTeX C source code: [lzlib.c#L358-L375](https://gitlab.lisn.upsaclay.fr/texlive/luatex/-/blob/f52b099f3e01d53dc03b315e1909245c3d5418d3/source/texk/web2c/luatexdir/luazlib/lzlib.c#L358-L375)
 ---
 ---@param crc32? number
 ---@param buffer? string
@@ -143,7 +140,6 @@ function zlib.crc32(crc32, buffer) end
 ---__Reference:__
 ---
 ---* Corresponding C source code: [lzlib.c#L748-L809](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L748-L809)
----* Corresponding LuaTeX C source code: [lzlib.c#L380-L441](https://gitlab.lisn.upsaclay.fr/texlive/luatex/-/blob/f52b099f3e01d53dc03b315e1909245c3d5418d3/source/texk/web2c/luatexdir/luazlib/lzlib.c#L380-L441)
 ---
 ---@param buffer string
 ---@param level? integer # The compression level must be `-1` (default compression), or between `0` and `9`: `1` gives best speed, `9` gives best compression, `0` gives no compression at all (the input data is simply copied a block at a time).
@@ -180,7 +176,6 @@ end
 ---__Reference:__
 ---
 ---* Corresponding C source code: [lzlib.c#L813-L871](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L813-L871)
----* Corresponding LuaTeX C source code: [lzlib.c#L445-L502](https://gitlab.lisn.upsaclay.fr/texlive/luatex/-/blob/f52b099f3e01d53dc03b315e1909245c3d5418d3/source/texk/web2c/luatexdir/luazlib/lzlib.c#L445-L502)
 ---
 ---@param buffer string
 ---@param window_bits? integer # `The window_bits` parameter is the base two logarithm of the maximum window size (the size of the history buffer). It should be in the range `8..15` for this version of the library, default `15`.
@@ -192,7 +187,7 @@ function zlib.decompress(buffer, window_bits) end
 
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
----@class Sink
+---@class zlib.Sink
 local Sink = {}
 
 ---
@@ -214,7 +209,7 @@ function Sink:flush() end
 ---
 ---* Corresponding C source code: [lzlib.c#L227-L268](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L227-L268)
 ---
----@param sink Sink | function
+---@param sink zlib.Sink | function
 ---@param level? integer # The compression level must be `-1` (default compression), or between `0` and `9`: `1` gives best speed, `9` gives best compression, `0` gives no compression at all (the input data is simply copied a block at a time).
 ---@param method? integer # The method parameter is the compression method. It must be `8` (`Z_DEFLATED`) in this version of the library.
 ---@param window_bits? integer # `The window_bits` parameter is the base two logarithm of the maximum window size (the size of the history buffer). It should be in the range `8..15` for this version of the library, default `15`.
@@ -222,7 +217,7 @@ function Sink:flush() end
 ---@param strategy? integer - default `Z_DEFAULT_STRATEGY`
 ---@param dictionary? string - default `""`
 ---
----@return Stream
+---@return zlib.Stream
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
 function zlib.deflate(
@@ -238,7 +233,7 @@ end
 
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
----@class InflateSink
+---@class zlib.InflateSink
 local InflateSink = {}
 
 ---
@@ -256,22 +251,26 @@ function InflateSink:close() end
 ---
 ---* Corresponding C source code: [lzlib.c#L277-L323](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L277-L323)
 ---
----@param source string|function|InflateSink
+---@param source string|function|zlib.InflateSink
 ---@param window_bits? integer -  default `15`
 ---@param dictionary? string - default `""`
 ---
----@return Stream
+---@return zlib.Stream
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
 function zlib.inflate(source, window_bits, dictionary) end
 
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
----@class Stream
+---@class zlib.Stream
 local Stream = {}
 
 ---
 ---Write each parameter into the stream.
+---
+---__Reference:__
+---
+---* Corresponding C source code: [lzlib.c#L673-L676](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L673-L676)
 ---
 ---@param ... any
 ---
@@ -282,8 +281,13 @@ function Stream:write(...) end
 ---Read from the stream, each parameter corresponds to a return value.
 ---
 ---With no arguments, it reads a line. Parameters are interpreted as follows:
+---
 ---* `a` - reads the remaining bytes
 ---* `l` - reads a line
+---
+---__Reference:__
+---
+---* Corresponding C source code: [lzlib.c#L550-L592](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L550-L592)
 ---
 ---@param ... integer|'a'|'l'
 ---
@@ -302,6 +306,10 @@ function Stream:lines() end
 ---
 ---Flush the output for deflate streams.
 ---
+---__Reference:__
+---
+---* Corresponding C source code: [lzlib.c#L681-L691](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L681-L691)
+---
 ---@param opts 'sync'|'full'|'finish'
 ---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
@@ -310,7 +318,20 @@ function Stream:flush(opts) end
 ---
 ---Close the stream.
 ---
+---__Reference:__
+---
+---* Corresponding C source code: [lzlib.c#L192-L204](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L192-L204)
+---
 ---😱 [Types](https://github.com/LuaCATS/lzlib/blob/main/library/lzlib.lua) incomplete or incorrect? 🙏 [Please contribute!](https://github.com/LuaCATS/lzlib/pulls)
 function Stream:close() end
+
+---
+---__Reference:__
+---
+---* Corresponding C source code: [lzlib.c#L208-L212](https://github.com/LuaDist/lzlib/blob/db11786b49beb02ce95ef8043c59bd13a4138cb3/lzlib.c#L208-L212)
+---
+---@return number adler
+function Stream:adler() end
+
 
 return zlib
